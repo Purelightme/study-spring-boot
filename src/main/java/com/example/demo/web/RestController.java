@@ -1,5 +1,6 @@
 package com.example.demo.web;
 
+import com.example.demo.config.HomeProperties;
 import com.example.demo.dao.User;
 import com.example.demo.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class RestController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private HomeProperties homeProperties;
 
     @RequestMapping("/create/{name}/{age}")
     public String create(@PathVariable String name,@PathVariable int age){
@@ -49,5 +53,10 @@ public class RestController {
     public List<User> list(){
         List<User> list = userRepository.findAll();
         return list;
+    }
+
+    @RequestMapping("/test")
+    public String test(){
+        return homeProperties.getDesc();
     }
 }
