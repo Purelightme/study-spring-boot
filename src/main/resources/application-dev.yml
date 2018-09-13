@@ -18,8 +18,16 @@ spring:
   freemarker:
     charset: utf-8
     content-type: text/html
+  output:
+    ansi:
+      enabled: detect
+
 
 home:
   province: hubei
   city: wuhan
-  desc: ${home.province} ${home.city} different every day
+  desc: ${home.province} ${home.city} different every day ${random.uuid}
+
+logging:
+  file: spring-boot.log
+  path: /tmp
