@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 public class User {
@@ -12,6 +13,7 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    @Min(value = 18,message = "111未成年11ewq2421")
     @Column(nullable = false)
     private Integer age;
 

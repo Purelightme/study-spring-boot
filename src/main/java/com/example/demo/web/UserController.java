@@ -1,19 +1,25 @@
 package com.example.demo.web;
 
 import com.example.demo.config.HomeProperties;
+import com.example.demo.dao.Result;
 import com.example.demo.dao.User;
 import com.example.demo.dao.UserRepository;
+import com.example.demo.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping(path = "/user")
-public class RestController {
+public class UserController {
 
     @Autowired
     private UserRepository userRepository;
@@ -26,6 +32,16 @@ public class RestController {
         User user = new User(name,age);
         userRepository.save(user);
         return  "create successful";
+    }
+
+    @RequestMapping("/add")
+    public Result<User> add(@Valid User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
+        }
+        user.setName(user.getName());
+        user.setAge(user.getAge());
+        return ResultUtil.success(userRepository.save(user));
     }
 
     @RequestMapping("/del/{id}")

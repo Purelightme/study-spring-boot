@@ -21,6 +21,9 @@ spring:
   output:
     ansi:
       enabled: detect
+  devtools:
+    restart:
+      enabled: true
 
 
 home:
