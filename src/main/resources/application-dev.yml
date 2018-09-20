@@ -24,6 +24,12 @@ spring:
   devtools:
     restart:
       enabled: true
+    livereload:
+      enabled: true
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 
 home:
@@ -34,3 +40,8 @@ home:
 logging:
   file: spring-boot.log
   path: /tmp
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
